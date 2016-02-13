@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<HTML>
+   <HEAD>
+      <TITLE>
+         html5 rtmp demo
+      </TITLE>
+   </HEAD>
+<BODY>
+  	<h1>{{ username }}'s stream</h1>
+    <script src="dist/hls.js"></script>
+	<video id="video"></video>
+	<script>
+  		if(Hls.isSupported()) {
+    			var video = document.getElementById('video');
+    			var hls = new Hls();
+    			hls.loadSource('http://162.243.140.45/hls/{{ username }}.m3u8');
+			hls.attachMedia(video);
+    			hls.on(Hls.Events.MANIFEST_PARSED,function() {
+      			video.play();
+  		});
+ 		}
+	</script>
+</BODY>
+</HTML>
