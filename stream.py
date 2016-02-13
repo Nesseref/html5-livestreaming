@@ -27,8 +27,14 @@ def serve_js(path):
     return send_from_directory('dist', path)
 
 @app.route('/<username>')
-def hello(username):
-    return render_template('player.html', username=username);
+def serve_player(username):
+    conn = psycopg2.connect(database=config.database, user=config.user, password=config.password, host=config.host)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM users WHERE username=%s", (username,))
+    if len(cur.fetchall()) == 0:
+        return "No such user!"
+    else:
+        return render_template('player.html', username=username);
 
 if __name__== '__main__':
     app.run(host='0.0.0.0')
