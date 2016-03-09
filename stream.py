@@ -6,7 +6,7 @@ import requests
 
 app = Flask(__name__)
 
-hostname = ''
+hostname = 'http://[hostname]/hls/'
 
 @app.route('/auth')
 def auth():
