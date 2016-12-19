@@ -39,7 +39,7 @@ def serve_player(username):
     else:
         r = requests.get(hostname + username + ".m3u8")
         if r.status_code == requests.codes.ok:
-            return render_template('player.html', username=username);
+            return render_template('player.html', username=username, hostname=hostname);
         else:
             return "Stream offline!"
 
